@@ -1,0 +1,22 @@
+CREATE DATABASE database_links;
+
+USE database_links;
+-- USERS TABLE
+CREATE TABLE IF NOT EXISTS users(
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    username VARCHAR(16) NOT NULL,
+    password VARCHAR(60) NOT NULL,
+    fullname VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS links (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    user_id INT(11),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
